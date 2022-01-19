@@ -55,7 +55,21 @@ const setDrillingRig = async () => {
 	})
 }
 
+const setFieldBush = async () => {
+	return new Promise((resolve, reject) => {
+		rl.question(dedent`${chalk.bold.bgGreen.magenta(' FIELD_BUSH ')}
+		Месторождение(${defPar.field}): `,
+			field => {
+				writeCell(CELLS.field, `${field ? field : defPar.field}`);
+				rl.question(dedent`Номер куста(${defPar.bush}): `,
+					bush => {
+						writeCell(CELLS.bush, `${bush ? bush : defPar.bush}`);
+						resolve();
+					})
+			})
+	})
+}
 
 
 
-export { greating, goodbuy, setMonth, setDrillingRig }
+export { greating, goodbuy, setMonth, setDrillingRig, setFieldBush }

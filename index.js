@@ -5,6 +5,7 @@ await cons.greating();
 
 await readSheet(FILES.source)
 await cons.setDrillingRig()
+await cons.setFieldBush()
 await cons.setMonth();
 
 await writeSheet(FILES.result);

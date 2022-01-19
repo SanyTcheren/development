@@ -1,7 +1,7 @@
 import Excel from 'exceljs';
 
 const FILES = {
-	source: './store/test.xlsx',
+	source: './store/form1.xlsx',
 	result: './store/result.xlsx',
 	default: './store/default.json'
 }
@@ -9,6 +9,8 @@ const FILES = {
 const CELLS = {
 	month: 'D2',
 	drillingRig: 'D4',
+	field: 'D5',
+	bush: 'D6'
 }
 
 const workbook = new Excel.Workbook();
