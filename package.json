@@ -1,18 +1,26 @@
 {
-  "name": "createpowersheet",
+  "name": "power-report",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "create report of power for month",
+  "main": "report.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "",
+  "author": "sany tcheren",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://git.hub/sanytcheren/1.git"
+  },
+  "bugs": {
+    "email": "tcherenkovskiy@gmail.com"
+  },
   "dependencies": {
     "chalk": "^5.0.0",
     "dedent-js": "^1.0.1",
-    "exceljs": "^4.3.0"
+    "exceljs": "^4.3.0",
+    "moment": "^2.29.1"
   }
 }
