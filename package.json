@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://git.hub/sanytcheren/1.git"
+    "url": "https://github.com/SanyTcheren/power-report.git"
   },
   "bugs": {
     "email": "tcherenkovskiy@gmail.com"
@@ -21,6 +21,7 @@
     "chalk": "^5.0.0",
     "dedent-js": "^1.0.1",
     "exceljs": "^4.3.0",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "yargs": "^17.3.1"
   }
 }

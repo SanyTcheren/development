@@ -11,7 +11,12 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}/index.js"
+			"program": "${workspaceFolder}/report.js",
+			"args": [
+				"-f",
+				"Тепловское",
+				"108"
+			]
 		}
 	]
 }
