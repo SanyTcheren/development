@@ -3,11 +3,12 @@ import Excel from 'exceljs';
 const FILES = {
 	source: './store/test.xlsx',
 	result: './store/result.xlsx',
+	default: './store/default.json'
 }
 
 const CELLS = {
 	month: 'D2',
-	type: ''
+	drillingRig: 'D4',
 }
 
 const workbook = new Excel.Workbook();
