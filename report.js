@@ -1,4 +1,5 @@
 import yargs from "yargs";
+import { writeReport } from "./helper/writeReport.js";
 import { printData, printHelp, printError, printSucces } from "./services/log.service.js";
 import { PARAMS, saveKeyValue } from "./services/storage.service.js";
 
@@ -62,7 +63,7 @@ const saveYear = (year) => {
 	}
 }
 
-const initCli = () => {
+const initCli = async () => {
 	const args = yargs(process.argv.slice(2)).argv;
 	if (args.h) {
 		printHelp();
@@ -105,7 +106,7 @@ const initCli = () => {
 		return;
 	}
 
-	console.log(args)
+	await writeReport()
 }
 
 initCli()
