@@ -1,7 +1,12 @@
 import yargs from "yargs";
 import { writeReport } from "./helper/writeReport.js";
 import { printData, printHelp, printError, printSucces } from "./services/log.service.js";
-import { PARAMS, saveKeyValue } from "./services/storage.service.js";
+import { getKeyValue, PARAMS, saveKeyValue } from "./services/storage.service.js";
+import moment from "moment";
+
+const countDaysOfMonth = (year, month) => {
+	return 32 - new Date(year, month - 1, 32).getDate();
+}
 
 const saveTypeNumber = (type, number) => {
 	if (!type.length) {
@@ -63,6 +68,73 @@ const saveYear = (year) => {
 	}
 }
 
+const saveWell = async (well, times, type) => {
+	if (!(well + '').length) {
+		printError(' Не передан номер скважины')
+		return;
+	}
+	if (times.length < 2) {
+		printError('Не передана дата и время начала строительства скважины');
+		return;
+	}
+	try {
+		const start = moment(`${times[0]} ${times[1] < 10 ? '0' + times[1] : times[1]}`);
+		if (!start.isValid()) {
+			printError('Не правильно задана дата начала строительства скважины');
+			return;
+		}
+		let end = moment('3000-01-01');
+		if (times.length > 2) {
+			end = moment(`${times[2]} ${times[3] < 10 ? '0' + times[3] : times[3]}`);
+		}
+		if (!end.isValid()) {
+			printError('Не правильно задана дата оконания строительства скважины');
+			return;
+		}
+		if (end.isBefore(start)) {
+			printError('Время окончания строительства скважины должно быть после времени начала строительства скважины');
+			return;
+		}
+
+		const year = await getKeyValue(PARAMS.year);
+		const month = await getKeyValue(PARAMS.month);
+		if (start.isAfter(`${year}-${month < 10 ? '0' + month : month}-${countDaysOfMonth(year, month)} 23:59`) ||
+			end.isBefore(`${year}-${month < 10 ? '0' + month : month}-01 00:00`)) {
+			printError('Время строительства скважины не происходит в отчетном месяце')
+			return;
+		}
+
+		const wells = await getKeyValue([PARAMS.wells]);
+
+		wells != [] && wells.forEach(w => {
+			if (!(moment(w[PARAMS.wellStart]).isSameOrAfter(end) || moment(w[PARAMS.wellEnd]).isSameOrBefore(start))) {
+				throw new Error('Время строительства скважины пересекается с другими скважинами');
+			}
+		})
+
+		wells.push({
+			type: type,
+			number: '' + well,
+			start: start.format('YYYY-MM-DD HH:mm'),
+			end: end.format('YYYY-MM-DD HH:mm')
+		})
+
+		await saveKeyValue([PARAMS.wells], [wells]);
+		printSucces(` Информаци о строительстве скважины ${well} сохранена`)
+	} catch (error) {
+		printError(error.message)
+	}
+}
+
+const clearWells = async () => {
+	try {
+		await saveKeyValue([PARAMS.wells], [[]]);
+		printSucces('Данные о строительстве скважин удалены')
+	} catch (error) {
+		printError(error.message)
+	}
+}
+
 const initCli = async () => {
 	const args = yargs(process.argv.slice(2)).argv;
 	if (args.h) {
@@ -78,7 +150,7 @@ const initCli = async () => {
 		return;
 	}
 	if (args.c) {
-		//очистка данных по скважинам
+		clearWells()
 		return;
 	}
 	if (args.d) {
@@ -98,11 +170,11 @@ const initCli = async () => {
 		return;
 	}
 	if (args.w) {
-		//добавление скважины
+		saveWell(args.w, args._, 'build');
 		return;
 	}
 	if (args.p) {
-		//добавление пзр
+		saveWell(args.p, args._, 'prepare');
 		return;
 	}
 

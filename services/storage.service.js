@@ -8,7 +8,12 @@ const PARAMS = {
 	field: 'field',
 	bush: 'bush',
 	month: 'month',
-	year: 'year'
+	year: 'year',
+	wells: 'wells',
+	wellType: 'type',
+	wellNumber: 'number',
+	wellStart: 'start',
+	wellEnd: 'end'
 }
 
 
@@ -46,4 +51,4 @@ const saveKeyValue = async (key, value) => {
 	await promises.writeFile(fileData, JSON.stringify(data));
 }
 
-export { readData, saveKeyValue, PARAMS }
+export { readData, saveKeyValue, PARAMS, getKeyValue }

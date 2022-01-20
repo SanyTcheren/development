@@ -37,7 +37,7 @@ node report
 - `node report -h` - вывод справки
 - `node report -e` - показывает пример использования cli
 - `node report -v` - показывает установленные данные для отчета
-- `node report -c` - очищмет данные по скважинам
+- `node report -c` - очищает данные по скважинам
 - `node report -d [type] [number]` - установка типа и номера буровой установки
 - `node report -f [field] [bush]` - установка месторождения и номера куста
 - `node report -m [month]` - установка отчетного месяца

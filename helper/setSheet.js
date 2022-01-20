@@ -42,7 +42,6 @@ const setSheet = async (sheet, template) => {
 		sheet.unMergeCells(template.cellUnMerge[i])
 	}
 	for (let i = 0; i < template.cellMerge.length; i++) {
-		console.log(template.cellMerge[i]);
 		sheet.mergeCells(template.cellMerge[i]);
 	}
 
