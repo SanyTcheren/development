@@ -134,6 +134,32 @@ const setSheet = async (sheet, wells, power) => {
 				}
 			}
 		}
+		//Запись математичиских формул
+		for (let m = 0; m < keys.day.length; m++) {
+			sheet.getCell(`${keys.day[m]}${keys.firstRow + 2 + 3 * i}`).value = {
+				formula: `${keys.day[m]}${keys.firstRow + 3 * i}+${keys.day[m]}${keys.firstRow + 1 + 3 * i}`
+			}
+		}
+		sheet.getCell(`AJ${keys.firstRow + i * 3}`).value = {
+			formula: `SUM(E${keys.firstRow + i * 3}:AI${keys.firstRow + i * 3})`,
+		}
+		sheet.getCell(`AJ${keys.firstRow + 1 + i * 3}`).value = {
+			formula: `SUM(E${keys.firstRow + 1 + i * 3}:AI${keys.firstRow + 1 + i * 3})`,
+		}
+		sheet.getCell(`AJ${keys.firstRow + 2 + i * 3}`).value = {
+			formula: `AJ${keys.firstRow + i * 3}+AJ${keys.firstRow + 1 + i * 3}`,
+		}
+		//Индекс последней строки
+		const lastRow = keys.firstRow + wells.length * 3;
+		sheet.getCell(`AK${keys.firstRow + i * 3}`).value = {
+			formula: `AJ${keys.firstRow + i * 3}/AJ${lastRow}*AL${lastRow}`,
+		}
+		sheet.getCell(`AK${keys.firstRow + 1 + i * 3}`).value = {
+			formula: `AJ${keys.firstRow + 1 + i * 3}/AJ${lastRow}*AL${lastRow}`,
+		}
+		sheet.getCell(`AK${keys.firstRow + 2 + i * 3}`).value = {
+			formula: `AK${keys.firstRow + i * 3}+AK${keys.firstRow + 1 + i * 3}`,
+		}
 	}
 }
 

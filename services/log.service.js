@@ -56,4 +56,39 @@ const printArr = (arr) => {
 	return result;
 }
 
-export { printError, printSucces, printHelp, printData }
+const printGuide = () => {
+	console.log(
+		dedent`${chalk.bgYellow.bold.black(' GUIDE ')}
+		1. Снимите профиль мощности со стчетчика электрической энергии СЭТ-4М, переименуйте его в ${chalk.yellow('power.txt')} и поместите в домашнюю папку пользователя вашей ОС. Файл должен содержать профиль мощности по часам с 1го по последнее число месяца.
+		2. Сконфигурируйте общие данные необходимые для отчета:
+		${chalk.blue(`
+		node report - y 2021 
+		node report - m 11
+		node report - d "УРАЛМАШ 5000/320 ЭК-БМЧ" 14938
+		node report - f "Тепловское" 108
+		`)}
+		3. Задайте данные по скважинам:
+		${chalk.blue(`
+		node report - w 2011Г 2021 - 10 - 10 12 2021 - 11 - 05 10
+		node report - p 1903Г 2021 - 11 - 05 10 2021 - 11 - 05 22
+		node report - w 1903Г 2021 - 11 - 05 22 2021 - 11 - 25 16
+		node report - p 8888Г 2021 - 11 - 25 16 2021 - 11 - 26 02
+		node report - w 8888Г 2021 - 11 - 26 02
+		`)}
+		4. Проверьте введеные данные:
+		${chalk.blue(`
+		node report - v
+		`)}
+		- если необходимо изменить общие данные, то просто воспользуйтесь соответствующей командой ещё раз
+		- если необходимо изменить данные по скважинам то сначала выполните чистку, а потом повторно введите данные
+		${chalk.blue(`
+		node report - c
+		`)}
+		5. Если данные верны, то сгенерируйте отчет
+		${chalk.blue(`
+		node report
+		`)}
+		6. Заберите файл отчета ${chalk.yellow('report.xlsx')} из домашней папки пользователя вашей ОС `);
+}
+
+export { printError, printSucces, printHelp, printData, printGuide }

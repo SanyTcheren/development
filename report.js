@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { writeReport } from "./helper/writeReport.js";
-import { printData, printHelp, printError, printSucces } from "./services/log.service.js";
+import { printData, printHelp, printError, printSucces, printGuide } from "./services/log.service.js";
 import { getKeyValue, PARAMS, saveKeyValue } from "./services/storage.service.js";
 import moment from "moment";
 
@@ -142,7 +142,7 @@ const initCli = async () => {
 		return;
 	}
 	if (args.e) {
-		//пример использовния
+		printGuide();
 		return;
 	}
 	if (args.v) {
