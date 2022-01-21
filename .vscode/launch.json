@@ -13,10 +13,7 @@
 			],
 			"program": "${workspaceFolder}/report.js",
 			"args": [
-				"-w",
-				"6666",
-				"2020-11-01",
-				"11"
+				"-",
 			]
 		}
 	]
