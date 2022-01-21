@@ -6,6 +6,7 @@ import { getTemplate } from './getTemplate.js';
 import { setSheet } from './setSheet.js';
 import { getSortedWells } from "../services/storage.service.js";
 import { setWells } from './setWells.js';
+import { getPower } from './getPower.js';
 
 
 const getTempl = (wells) => {
@@ -24,6 +25,8 @@ const templatePath = './templates/template.xlsx';
 
 const resultPath = join(homedir(), '/report.xlsx');
 
+const powerPath = join(homedir(), '/power.txt');
+
 const writeReport = async () => {
 	try {
 		const workbook = new Excel.Workbook();
@@ -33,8 +36,11 @@ const writeReport = async () => {
 		const wells = await getSortedWells();
 		const templ = getTempl(wells);
 		const template = await getTemplate(templ);
+		const power = await getPower(powerPath);
+
 		await setSheet(sheet, template);
-		await setWells(sheet, wells);
+		await setWells(sheet, wells, power);
+
 
 		await workbook.xlsx.writeFile(resultPath);
 		printSucces(' Отчет создан. Заберите report.xlsx из рабочей директории')
