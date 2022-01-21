@@ -13,8 +13,13 @@ const cellMerge12 = ['B19:D19', 'B22:D22', 'B25:D25', 'B28:D28', 'B29:D29', 'B31
 const cellUnMerge12 = ['B19', 'B22', 'B25', 'B28', 'B29', 'B31', 'L23', 'L26', 'AH13', 'A10', 'A11', 'A12', 'B12'];
 
 const TEMPLATE = {
-	sabe: undefined,
-	sab: {
+	saae: {
+		wells: 4,
+		rowDel: [[]],
+		cellUnMerge: [],
+		cellMerge: [],
+	},
+	saa: {
 		wells: 3,
 		rowDel: [[18, 3]],
 		cellUnMerge: cellUnMerge31,
@@ -26,7 +31,7 @@ const TEMPLATE = {
 		cellUnMerge: [...cellUnMerge31, 'A15', 'B17'],
 		cellMerge: [...cellMerge31, 'A15:A17', 'B17:D17']
 	},
-	abe: {
+	aae: {
 		wells: 3,
 		rowDel: [[10, 2]],
 		cellUnMerge: cellUnMerge32,
@@ -44,13 +49,13 @@ const TEMPLATE = {
 		cellUnMerge: [...cellUnMerge21, 'A12', 'B14'],
 		cellMerge: [...cellMerge21, 'A12:A14', 'B14:D14'],
 	},
-	be: {
+	ae: {
 		wells: 2,
 		rowDel: [[10, 5]],
 		cellUnMerge: cellUnMerge22,
 		cellMerge: cellMerge22,
 	},
-	be: {
+	aa: {
 		wells: 2,
 		rowDel: [[18, 3], [10, 2]],
 		cellUnMerge: cellUnMerge22,
@@ -76,8 +81,9 @@ const TEMPLATE = {
 	}
 }
 
-const getTemplate = () => {
-	return TEMPLATE.a;
+const getTemplate = async (templ) => {
+
+	return TEMPLATE[templ];
 }
 
 export { getTemplate }

@@ -1,6 +1,8 @@
 import { homedir } from 'os'
 import { join } from 'path'
 import { promises } from 'fs'
+import moment from "moment";
+
 
 const PARAMS = {
 	type: "type",
@@ -51,4 +53,23 @@ const saveKeyValue = async (key, value) => {
 	await promises.writeFile(fileData, JSON.stringify(data));
 }
 
-export { readData, saveKeyValue, PARAMS, getKeyValue }
+const getSortedWells = async () => {
+	const wellsData = await getKeyValue(PARAMS.wells);
+	if (wellsData.length == 0) return [];
+
+	const wells = {};
+	for (let i = 0; i < wellsData.length; i++) {
+		const name = wellsData[i][PARAMS.wellNumber];
+		const well = wells[name] ?? {};
+		well[wellsData[i][PARAMS.wellType]] = wellsData[i];
+		wells[name] = well;
+	}
+	const sortedWells = Object.values(wells).sort((a, b) => {
+		const aStart = moment(a.prepare ? a.prepare.start : a.build.start);
+		const bStart = moment(b.prepare ? b.prepare.start : b.build.start);
+		return aStart.isAfter(bStart) ? 1 : -1;
+	});
+	return sortedWells;
+}
+
+export { readData, saveKeyValue, PARAMS, getKeyValue, getSortedWells }
