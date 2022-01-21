@@ -13,7 +13,7 @@
 			],
 			"program": "${workspaceFolder}/report.js",
 			"args": [
-				"-",
+				"-e",
 			]
 		}
 	]

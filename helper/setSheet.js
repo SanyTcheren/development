@@ -108,7 +108,8 @@ const setSheet = async (sheet, wells, power) => {
 	const year = await getKeyValue(PARAMS.year);
 
 
-
+	//Индекс последней строки
+	const lastRow = keys.firstRow + wells.length * 3;
 	//Заполняем данные по скважинам
 	for (let i = 0; i < wells.length; i++) {
 		const number = (wells[i][wells[i].prepare ? 'prepare' : 'build'].number);
@@ -149,8 +150,7 @@ const setSheet = async (sheet, wells, power) => {
 		sheet.getCell(`AJ${keys.firstRow + 2 + i * 3}`).value = {
 			formula: `AJ${keys.firstRow + i * 3}+AJ${keys.firstRow + 1 + i * 3}`,
 		}
-		//Индекс последней строки
-		const lastRow = keys.firstRow + wells.length * 3;
+
 		sheet.getCell(`AK${keys.firstRow + i * 3}`).value = {
 			formula: `AJ${keys.firstRow + i * 3}/AJ${lastRow}*AL${lastRow}`,
 		}
@@ -162,5 +162,4 @@ const setSheet = async (sheet, wells, power) => {
 		}
 	}
 }
-
 export { setSheet }
