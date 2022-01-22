@@ -16,7 +16,6 @@ const printSucces = message => {
 const printHelp = () => {
 	console.log(
 		dedent`${chalk.bgYellow.bold.black(' HELP ')}
-		${chalk.yellow('без параметров')} - создание отчета на основе установленных данных
 		${chalk.yellow(`--all`)} - выводит потребленную электроэнергию по дням за весь отчетный месяц
 		${chalk.yellow(`--day [day] [h1] [h2] ...`)} - выводит потребленную энергию за день,
 		при задании ${chalk.yellow('h1, ...')} разобъет суммирование энергию по часам, 
@@ -31,7 +30,10 @@ const printHelp = () => {
 		${chalk.yellow('-y [year]')} - установка отчетного года
 		${chalk.yellow('-w [number] [s-date] [s-hours] [f-date] [f-hours]')} - добавление в отчет скважины 
 		${chalk.yellow('-p [number] [s-date] [s-hours] [f-date] [f-hours]')} - добавление в отчет пзр скважины
-		${chalk.red('дату указывайте по шаблону YYYY-MM-DD, для времени укажите час обычным числом')}`);
+		${chalk.red('дату указывайте по шаблону YYYY-MM-DD, для времени укажите час обычным числом')}
+		${chalk.yellow('-o')} - создание отчета на основе установленных данных
+		`);
+
 }
 
 const printData = async () => {
