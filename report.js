@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { writeReport } from "./helper/writeReport.js";
-import { printData, printHelp, printError, printSucces, printGuide } from "./services/log.service.js";
+import { printData, printHelp, printError, printSucces, printGuide, printAll, printDay } from "./services/log.service.js";
 import { getKeyValue, PARAMS, saveKeyValue } from "./services/storage.service.js";
 import moment from "moment";
 
@@ -177,8 +177,20 @@ const initCli = async () => {
 		saveWell(args.p, args._, 'prepare');
 		return;
 	}
-
-	await writeReport()
+	if (args.all) {
+		printAll();
+		return;
+	}
+	if (args.day) {
+		printDay(args.day, args._);
+		return;
+	}
+	if (args.o) {
+		await writeReport()
+		return;
+	}
+	printGuide();
+	printHelp();
 }
 
 initCli()

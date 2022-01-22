@@ -38,4 +38,4 @@ const writeReport = async () => {
 
 
 
-export { writeReport };
+export { writeReport, powerPath };
