@@ -4,9 +4,12 @@
   "description": "create report of power for month",
   "main": "report.js",
   "type": "module",
+  "bin": {
+    "report": "report.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node report.js"
   },
   "author": "sany tcheren",
   "license": "ISC",

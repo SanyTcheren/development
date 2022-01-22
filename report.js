@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import yargs from "yargs";
 import { writeReport } from "./helper/writeReport.js";
 import { printData, printHelp, printError, printSucces, printGuide, printAll, printDay } from "./services/log.service.js";
