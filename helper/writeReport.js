@@ -5,9 +5,11 @@ import { printSucces, printError } from '../services/log.service.js';
 import { setSheet } from './setSheet.js';
 import { getSortedWells } from "../services/storage.service.js";
 import { getPower } from './getPower.js';
+import { URL } from 'url'
 
-
-const templatePath = './templates/template.xlsx';
+//Получаем путь к текущему каталогу и определяем где находится наш шаблон
+const __dirname = new URL('.', import.meta.url).pathname;
+const templatePath = join(__dirname, '../template.xlsx');
 
 const resultPath = join(homedir(), '/report.xlsx');
 
@@ -34,8 +36,5 @@ const writeReport = async () => {
 		printError(error.message);
 	}
 }
-
-
-
 
 export { writeReport, powerPath };
