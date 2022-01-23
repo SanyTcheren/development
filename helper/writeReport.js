@@ -1,14 +1,15 @@
 import Excel from 'exceljs';
 import { homedir } from 'os'
-import { join } from 'path'
+import { dirname, join } from 'path'
 import { printSucces, printError } from '../services/log.service.js';
 import { setSheet } from './setSheet.js';
 import { getSortedWells } from "../services/storage.service.js";
 import { getPower } from './getPower.js';
-import { URL } from 'url'
+import { fileURLToPath } from 'url'
 
 //Получаем путь к текущему каталогу и определяем где находится наш шаблон
-const __dirname = new URL('.', import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const templatePath = join(__dirname, '../template.xlsx');
 
 const resultPath = join(homedir(), '/report.xlsx');
@@ -33,7 +34,8 @@ const writeReport = async () => {
 		await workbook.xlsx.writeFile(resultPath);
 		printSucces(' Отчет создан. Заберите report.xlsx из рабочей директории')
 	} catch (error) {
-		printError(error.message);
+		printError(`Не удалось создать отчет, убедитесь что заданы все данные, 
+для проверки используйте команду: report -v`);
 	}
 }
 

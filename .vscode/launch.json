@@ -13,7 +13,10 @@
 			],
 			"program": "${workspaceFolder}/report.js",
 			"args": [
-				"-e",
+				"-w",
+				"222Г",
+				"2021-11-01",
+				"1"
 			]
 		}
 	]

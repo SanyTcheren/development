@@ -55,6 +55,7 @@ const saveKeyValue = async (key, value) => {
 
 const getSortedWells = async () => {
 	const wellsData = await getKeyValue(PARAMS.wells);
+
 	if (wellsData.length == 0) return [];
 
 	const wells = {};

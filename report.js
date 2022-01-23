@@ -105,13 +105,18 @@ const saveWell = async (well, times, type) => {
 			return;
 		}
 
-		const wells = await getKeyValue([PARAMS.wells]);
+		let wells = await getKeyValue([PARAMS.wells]);
 
-		wells != [] && wells.forEach(w => {
-			if (!(moment(w[PARAMS.wellStart]).isSameOrAfter(end) || moment(w[PARAMS.wellEnd]).isSameOrBefore(start))) {
-				throw new Error('Время строительства скважины пересекается с другими скважинами');
-			}
-		})
+		if (wells != undefined && wells != []) {
+			wells.forEach(w => {
+				if (!(moment(w[PARAMS.wellStart]).isSameOrAfter(end) || moment(w[PARAMS.wellEnd]).isSameOrBefore(start))) {
+					throw new Error('Время строительства скважины пересекается с другими скважинами');
+				}
+			})
+		} else {
+			wells = [];
+		}
+
 
 		wells.push({
 			type: type,
