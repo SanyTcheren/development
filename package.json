@@ -7,10 +7,6 @@
   "bin": {
     "report": "report.js"
   },
-  "publishConfig": {
-    "name": "@SanyTcheren/power-report-cli",
-    "registry": "http://npm.pkg.github.com/SanyTcheren"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node report.js"
