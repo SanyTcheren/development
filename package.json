@@ -1,5 +1,5 @@
 {
-  "name": "@SanyTcheren/power-report-cli",
+  "name": "SanyTcheren/power-report-cli",
   "version": "1.1.5",
   "description": "create report of power for month",
   "main": "report.js",
