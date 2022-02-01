@@ -8,7 +8,7 @@
     "report": "report.js"
   },
   "publishConfig": {
-    "registry": "http://npm.pkg.github.com"
+    "registry": "http://npm.pkg.github.com/SanyTcheren"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
